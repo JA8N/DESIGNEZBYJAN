@@ -3,58 +3,205 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Roblox Portfolio</title>
+  <title>Roblox Design Studio</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="dark-mode">
+<body>
 
-  <!-- Header -->
-  <header>
-    <h1>Hey friends! 🎨</h1>
-    <p>I design Roblox clothes — full sets or single shirts & pants</p>
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="hero-content">
+      <div class="badge">Solo Designer</div>
+      <h1>
+        <span class="line">Roblox</span>
+        <span class="line">Design</span>
+        <span class="line accent">Studio</span>
+      </h1>
+      <p class="tagline">Transforming reference images into custom Roblox outfits.<br>Full sets. Individual pieces. Your vision, my craft.</p>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scroll to explore</span>
+      <div class="arrow"></div>
+    </div>
   </header>
 
-  <!-- Portfolio -->
-  <section class="portfolio">
-    <h2>My Designs for Clients</h2>
+  <!-- Portfolio Grid -->
+  <section class="portfolio" id="portfolio">
+    <div class="section-header">
+      <h2>Recent Drops</h2>
+      <p class="subtitle">Client commissions — reference to reality</p>
+    </div>
+    
     <div class="grid">
-      <!-- Referenzbilder -->
-      <div class="card">
-        <img src="images/reference1.jpg" alt="Reference 1">
-        <p>Reference Image 1</p>
+      <!-- Project 1 -->
+      <div class="card reference" data-category="reference">
+        <div class="card-image">
+          <img src="images/reference1.jpg" alt="Reference 1" loading="lazy">
+          <div class="overlay">
+            <span class="tag">Reference</span>
+          </div>
+        </div>
+        <div class="card-info">
+          <h3>Inspiration #1</h3>
+          <p>Original reference image</p>
+        </div>
       </div>
-      <div class="card">
-        <img src="images/reference2.jpg" alt="Reference 2">
-        <p>Reference Image 2</p>
+
+      <div class="card roblox" data-category="design">
+        <div class="card-image">
+          <img src="images/roblox1.jpg" alt="Roblox Design 1" loading="lazy">
+          <div class="overlay">
+            <span class="tag accent">Design</span>
+          </div>
+        </div>
+        <div class="card-info">
+          <h3>Custom Outfit #1</h3>
+          <p>Full set implementation</p>
+        </div>
       </div>
-      <div class="card">
-        <img src="images/reference3.jpg" alt="Reference 3">
-        <p>Reference Image 3</p>
+
+      <!-- Project 2 -->
+      <div class="card reference" data-category="reference">
+        <div class="card-image">
+          <img src="images/reference2.jpg" alt="Reference 2" loading="lazy">
+          <div class="overlay">
+            <span class="tag">Reference</span>
+          </div>
+        </div>
+        <div class="card-info">
+          <h3>Inspiration #2</h3>
+          <p>Original reference image</p>
+        </div>
       </div>
-      <!-- Roblox Umsetzung -->
-      <div class="card">
-        <img src="images/roblox1.jpg" alt="Roblox Set 1">
-        <p>Roblox Outfit 1 — my design implementation</p>
+
+      <div class="card roblox" data-category="design">
+        <div class="card-image">
+          <img src="images/roblox2.jpg" alt="Roblox Design 2" loading="lazy">
+          <div class="overlay">
+            <span class="tag accent">Design</span>
+          </div>
+        </div>
+        <div class="card-info">
+          <h3>Custom Outfit #2</h3>
+          <p>Detailed piece work</p>
+        </div>
       </div>
-      <div class="card">
-        <img src="images/roblox2.jpg" alt="Roblox Set 2">
-        <p>Roblox Outfit 2 — my design implementation</p>
+
+      <!-- Project 3 -->
+      <div class="card reference" data-category="reference">
+        <div class="card-image">
+          <img src="images/reference3.jpg" alt="Reference 3" loading="lazy">
+          <div class="overlay">
+            <span class="tag">Reference</span>
+          </div>
+        </div>
+        <div class="card-info">
+          <h3>Inspiration #3</h3>
+          <p>Original reference image</p>
+        </div>
+      </div>
+
+      <!-- Add more projects as needed -->
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about" id="about">
+    <div class="about-content">
+      <div class="about-text">
+        <h2>About the Studio</h2>
+        <p>I'm a solo Roblox designer specializing in translating real-world fashion into wearable Roblox creations. Every piece starts with careful study of reference materials — analyzing cuts, colors, textures, and style details.</p>
+        <p>From streetwear to formal wear, I create custom outfits that capture the essence of your vision while working within Roblox's unique canvas.</p>
+        <div class="stats">
+          <div class="stat">
+            <span class="number">50+</span>
+            <span class="label">Designs Created</span>
+          </div>
+          <div class="stat">
+            <span class="number">30+</span>
+            <span class="label">Happy Clients</span>
+          </div>
+          <div class="stat">
+            <span class="number">100%</span>
+            <span class="label">Custom Work</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-services">
+        <h3>What I Offer</h3>
+        <ul class="services-list">
+          <li>
+            <span class="icon">✦</span>
+            <div>
+              <strong>Full Outfit Sets</strong>
+              <p>Complete coordinated looks from head to toe</p>
+            </div>
+          </li>
+          <li>
+            <span class="icon">✦</span>
+            <div>
+              <strong>Individual Pieces</strong>
+              <p>Shirts, pants, accessories — standalone items</p>
+            </div>
+          </li>
+          <li>
+            <span class="icon">✦</span>
+            <div>
+              <strong>Custom Requests</strong>
+              <p>Bring your references, I'll bring them to life</p>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
   </section>
 
-  <!-- Über mich -->
-  <section class="about">
-    <h2>About Me</h2>
-    <p>I’m a solo Roblox designer creating full outfits and unique pieces for my clients.</p>
+  <!-- Contact Section -->
+  <section class="contact" id="contact">
+    <div class="contact-content">
+      <h2>Let's Work Together</h2>
+      <p class="contact-tagline">Ready to create something unique?<br>Drop me a message and let's discuss your project.</p>
+      
+      <div class="contact-methods">
+        <a href="mailto:jan@example.com" class="contact-card">
+          <span class="contact-icon">✉</span>
+          <div class="contact-info">
+            <strong>Email</strong>
+            <span>jan@example.com</span>
+          </div>
+        </a>
+        
+        <a href="#" class="contact-card">
+          <span class="contact-icon">💬</span>
+          <div class="contact-info">
+            <strong>Discord</strong>
+            <span>Jan#1234</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="cta">
+        <p>Currently accepting commissions</p>
+      </div>
+    </div>
   </section>
 
-  <!-- Kontakt -->
-  <section class="contact">
-    <h2>Contact</h2>
-    <p>Email: jan@example.com</p>
-    <p>Discord: Jan#1234</p>
-  </section>
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Roblox Design Studio. All designs are original work.</p>
+  </footer>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <button class="lightbox-close">&times;</button>
+    <div class="lightbox-content">
+      <img src="" alt="">
+      <div class="lightbox-info"></div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
