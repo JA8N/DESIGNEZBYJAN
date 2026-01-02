@@ -1,224 +1,279 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Roblox Design Studio</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
+// ========================================
+// CONFIGURATION
+// ========================================
+const CONFIG = {
+  animationDuration: 800,
+  debounceDelay: 10,
+  observerThreshold: 0.1,
+  observerRootMargin: '0px 0px -100px 0px'
+};
 
-  <!-- Hero Section -->
-  <header class="hero">
-    <div class="hero-content">
-      <div class="badge">Solo Designer</div>
-      <h1>
-        <span class="line">Roblox</span>
-        <span class="line">Design</span>
-        <span class="line accent">Studio</span>
-      </h1>
-      <p class="tagline">Transforming reference images into custom Roblox outfits.<br>Full sets. Individual pieces. Your vision, my craft.</p>
-    </div>
-    <div class="scroll-indicator">
-      <span>Scroll to explore</span>
-      <div class="arrow"></div>
-    </div>
-  </header>
+// ========================================
+// UTILITY FUNCTIONS
+// ========================================
+const debounce = (func, wait) => {
+  let timeout;
+  return function executedFunction(...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, args), wait);
+  };
+};
 
-  <!-- Portfolio Section -->
-  <section class="portfolio" id="portfolio">
-    <div class="section-header">
-      <h2>The Process</h2>
-      <p class="subtitle">From inspiration to implementation</p>
-    </div>
+const getElement = (selector) => document.querySelector(selector);
+const getElements = (selector) => document.querySelectorAll(selector);
+
+// ========================================
+// SMOOTH SCROLL
+// ========================================
+const initSmoothScroll = () => {
+  getElements('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = getElement(anchor.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+};
+
+// ========================================
+// LIGHTBOX
+// ========================================
+class Lightbox {
+  constructor() {
+    this.lightbox = getElement('#lightbox');
+    this.lightboxImg = this.lightbox.querySelector('img');
+    this.lightboxInfo = this.lightbox.querySelector('.lightbox-info');
+    this.lightboxClose = this.lightbox.querySelector('.lightbox-close');
+    this.init();
+  }
+
+  init() {
+    // Reference cards
+    getElements('.float-card').forEach((card, index) => {
+      card.addEventListener('click', () => this.open({
+        img: card.querySelector('img'),
+        title: `Reference Image ${index + 1}`,
+        description: "Original inspiration for design"
+      }));
+    });
+
+    // Result cards
+    getElements('.result-card').forEach(card => {
+      card.addEventListener('click', () => this.open({
+        img: card.querySelector('.card-image img'),
+        title: card.querySelector('.card-caption h4').textContent,
+        description: card.querySelector('.card-caption p').textContent
+      }));
+    });
+
+    // Close events
+    this.lightboxClose.addEventListener('click', () => this.close());
+    this.lightbox.addEventListener('click', (e) => {
+      if (e.target === this.lightbox) this.close();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && this.lightbox.classList.contains('show')) {
+        this.close();
+      }
+    });
+  }
+
+  open({ img, title, description }) {
+    this.lightboxImg.src = img.src;
+    this.lightboxImg.alt = img.alt;
+    this.lightboxInfo.innerHTML = `
+      <h3 style="color: var(--text-primary); font-size: 1.5rem; margin-bottom: 0.5rem;">${title}</h3>
+      <p style="color: var(--text-secondary);">${description}</p>
+    `;
+    this.lightbox.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+
+  close() {
+    this.lightbox.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+}
+
+// ========================================
+// INTERSECTION OBSERVER (Scroll Animations)
+// ========================================
+const initScrollAnimations = () => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animation = `fadeInUp ${CONFIG.animationDuration}ms ease-out forwards`;
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: CONFIG.observerThreshold,
+    rootMargin: CONFIG.observerRootMargin
+  });
+
+  // Observe elements
+  const elementsToObserve = [
+    ...getElements('.glass-box'),
+    ...getElements('.result-card'),
+    ...getElements('.about'),
+    ...getElements('.contact')
+  ];
+
+  elementsToObserve.forEach(el => observer.observe(el));
+};
+
+// ========================================
+// PARALLAX HERO
+// ========================================
+const initParallaxHero = () => {
+  const hero = getElement('.hero-content');
+  if (!hero) return;
+
+  const handleScroll = () => {
+    const scrolled = window.pageYOffset;
+    if (scrolled < window.innerHeight) {
+      hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+      hero.style.opacity = 1 - (scrolled / window.innerHeight);
+    }
+  };
+
+  window.addEventListener('scroll', debounce(handleScroll, CONFIG.debounceDelay));
+};
+
+// ========================================
+// LAZY LOADING
+// ========================================
+const initLazyLoading = () => {
+  if ('loading' in HTMLImageElement.prototype) {
+    // Native lazy loading supported
+    getElements('img[loading="lazy"]').forEach(img => {
+      if (img.dataset.src) {
+        img.src = img.dataset.src;
+      }
+    });
+  } else {
+    // Fallback for older browsers
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
+    document.body.appendChild(script);
+  }
+};
+
+// ========================================
+// PAGE LOAD ANIMATION
+// ========================================
+const initPageLoadAnimation = () => {
+  document.body.style.opacity = '0';
+  setTimeout(() => {
+    document.body.style.transition = 'opacity 0.5s ease';
+    document.body.style.opacity = '1';
+  }, 100);
+};
+
+// ========================================
+// KONAMI CODE EASTER EGG
+// ========================================
+const initKonamiCode = () => {
+  let konamiCode = [];
+  const konamiPattern = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+
+  document.addEventListener('keydown', (e) => {
+    konamiCode.push(e.key);
+    konamiCode = konamiCode.slice(-10);
     
-    <div class="split-container">
-      <!-- LEFT: Floating References -->
-      <div class="references-side">
-        <div class="glass-box">
-          <div class="box-header">
-            <h3>Reference</h3>
-            <span class="badge-small">Input</span>
-          </div>
-          
-          <div class="floating-images">
-            <div class="float-card" data-float="1">
-              <img src="images/reference1.jpg" alt="Reference 1" loading="lazy">
-              <div class="glow"></div>
-            </div>
-            <div class="float-card" data-float="2">
-              <img src="images/reference2.jpg" alt="Reference 2" loading="lazy">
-              <div class="glow"></div>
-            </div>
-            <div class="float-card" data-float="3">
-              <img src="images/reference3.jpg" alt="Reference 3" loading="lazy">
-              <div class="glow"></div>
-            </div>
-          </div>
-        </div>
-      </div>
+    if (konamiCode.join('') === konamiPattern.join('')) {
+      document.body.style.animation = 'rainbow 2s infinite';
+      setTimeout(() => {
+        document.body.style.animation = '';
+      }, 5000);
+    }
+  });
 
-      <!-- CENTER: Arrow/Equals -->
-      <div class="arrow-divider">
-        <div class="arrow-container">
-          <svg viewBox="0 0 100 100" class="arrow-svg">
-            <defs>
-              <linearGradient id="arrowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" style="stop-color:#00ff88;stop-opacity:1" />
-                <stop offset="100%" style="stop-color:#00ccff;stop-opacity:1" />
-              </linearGradient>
-            </defs>
-            <line x1="10" y1="30" x2="80" y2="30" stroke="url(#arrowGradient)" stroke-width="3"/>
-            <line x1="10" y1="50" x2="80" y2="50" stroke="url(#arrowGradient)" stroke-width="3"/>
-            <line x1="10" y1="70" x2="80" y2="70" stroke="url(#arrowGradient)" stroke-width="3"/>
-            <polygon points="80,50 90,45 90,55" fill="url(#arrowGradient)"/>
-          </svg>
-          <div class="arrow-text">Transform</div>
-        </div>
-      </div>
+  // Add rainbow animation
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes rainbow {
+      0% { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
+  `;
+  document.head.appendChild(style);
+};
 
-<!-- RIGHT: Final Results -->
-      <div class="results-side">
-        <div class="glass-box">
-          <div class="box-header">
-            <h3>Result</h3>
-            <span class="badge-small accent">Output</span>
-          </div>
-          
-          <div class="results-grid">
-            <div class="result-card" data-result="1">
-              <div class="card-image">
-                <img src="images/roblox1.jpg" alt="Roblox Design 1" loading="lazy">
-                <div class="card-overlay">
-                  <span class="tag-result">Front View</span>
-                </div>
-              </div>
-              <div class="card-caption">
-                <h4>Front Design</h4>
-                <p>Custom outfit - front view</p>
-              </div>
-            </div>
+// ========================================
+// PERFORMANCE MONITORING (Optional)
+// ========================================
+const logPerformance = () => {
+  if ('performance' in window) {
+    window.addEventListener('load', () => {
+      const perfData = performance.timing;
+      const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
+      console.log(`🎨 Roblox Design Studio loaded in ${pageLoadTime}ms`);
+    });
+  }
+};
 
-            <div class="result-card" data-result="2">
-              <div class="card-image">
-                <img src="images/roblox2.jpg" alt="Roblox Design 2" loading="lazy">
-                <div class="card-overlay">
-                  <span class="tag-result">Back View</span>
-                </div>
-              </div>
-              <div class="card-caption">
-                <h4>Back Design</h4>
-                <p>Custom outfit - back view</p>
-              </div>
-            </div>
-          </div>
-          
-          <div style="margin-top: 1rem; padding: 0.75rem; background: rgba(0, 255, 136, 0.05); border: 1px solid rgba(0, 255, 136, 0.2); border-radius: 12px; text-align: center;">
-            <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0;">
-              ⚠️ Background is AI generated
-            </p>
-          </div>
-        </div>
-      </div>
-      
-  <!-- About Section -->
-  <section class="about" id="about">
-    <div class="about-content">
-      <div class="about-text">
-        <h2>About the Studio</h2>
-        <p>I'm a solo Roblox designer specializing in translating real-world fashion into wearable Roblox creations. Every piece starts with careful study of reference materials — analyzing cuts, colors, textures, and style details.</p>
-        <p>From streetwear to formal wear, I create custom outfits that capture the essence of your vision while working within Roblox's unique canvas.</p>
-        <div class="stats">
-          <div class="stat">
-            <span class="number">50+</span>
-            <span class="label">Designs Created</span>
-          </div>
-          <div class="stat">
-            <span class="number">30+</span>
-            <span class="label">Happy Clients</span>
-          </div>
-          <div class="stat">
-            <span class="number">100%</span>
-            <span class="label">Custom Work</span>
-          </div>
-        </div>
-      </div>
-      <div class="about-services">
-        <h3>What I Offer</h3>
-        <ul class="services-list">
-          <li>
-            <span class="icon">✦</span>
-            <div>
-              <strong>Full Outfit Sets</strong>
-              <p>Complete coordinated looks from head to toe</p>
-            </div>
-          </li>
-          <li>
-            <span class="icon">✦</span>
-            <div>
-              <strong>Individual Pieces</strong>
-              <p>Shirts, pants, accessories — standalone items</p>
-            </div>
-          </li>
-          <li>
-            <span class="icon">✦</span>
-            <div>
-              <strong>Custom Requests</strong>
-              <p>Bring your references, I'll bring them to life</p>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </section>
+// ========================================
+// ERROR HANDLING
+// ========================================
+const initErrorHandling = () => {
+  window.addEventListener('error', (e) => {
+    console.error('Portfolio error:', e.message);
+  });
 
-<!-- Contact Section -->
-  <section class="contact" id="contact">
-    <div class="contact-content">
-      <h2>Let's Work Together</h2>
-      <p class="contact-tagline">Ready to create something unique?<br>Drop me a message and let's discuss your project.</p>
-      
-      <div class="contact-methods">
-        <a href="https://discord.com/users/designez" class="contact-card" target="_blank">
-          <span class="contact-icon">💬</span>
-          <div class="contact-info">
-            <strong>Discord</strong>
-            <span>designez</span>
-          </div>
-        </a>
-        
-        <a href="https://discord.com/users/designezbyjan" class="contact-card" target="_blank">
-          <span class="contact-icon">💬</span>
-          <div class="contact-info">
-            <strong>Discord Alt</strong>
-            <span>designezbyjan</span>
-          </div>
-        </a>
-      </div>
+  // Handle image loading errors
+  getElements('img').forEach(img => {
+    img.addEventListener('error', function() {
+      this.style.background = 'linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%)';
+      this.alt = 'Image failed to load';
+    });
+  });
+};
 
-      <div class="cta">
-        <p>Currently accepting commissions</p>
-      </div>
-    </div>
-  </section>
+// ========================================
+// INITIALIZE EVERYTHING
+// ========================================
+const init = () => {
+  console.log('🎨 Initializing Roblox Design Studio...');
+  
+  // Core features
+  initSmoothScroll();
+  new Lightbox();
+  initScrollAnimations();
+  initParallaxHero();
+  initLazyLoading();
+  initPageLoadAnimation();
+  
+  // Easter eggs & extras
+  initKonamiCode();
+  
+  // Error handling
+  initErrorHandling();
+  
+  // Performance monitoring
+  logPerformance();
+  
+  console.log('✅ Portfolio initialized successfully!');
+};
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2026 Roblox Design Studio. All designs are original work.</p>
-  </footer>
+// Start when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
 
-  <!-- Lightbox -->
-  <div id="lightbox" class="lightbox">
-    <button class="lightbox-close">&times;</button>
-    <div class="lightbox-content">
-      <img src="" alt="">
-      <div class="lightbox-info"></div>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
-</body>
-</html>
+// ========================================
+// EXPORTS (for potential future modules)
+// ========================================
+window.PortfolioApp = {
+  config: CONFIG,
+  debounce,
+  getElement,
+  getElements
+};
