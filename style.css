@@ -1,74 +1,73 @@
-/* Grundlayout & Dark Mode */
-* { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', sans-serif; }
-body { 
-  background: #121212; 
-  color:#e0e0e0; 
-  min-height:100vh; 
+/* Dark Mode aktiv */
+body.dark-mode {
+  background-color: #0d0d0d;
+  color: #e0e0e0;
+  font-family: 'Segoe UI', sans-serif;
+  line-height: 1.6;
 }
 
 /* Header */
 header {
   text-align: center;
   padding: 4rem 2rem;
+  background-color: #111;
 }
-header h1 { font-size:3rem; margin-bottom:0.5rem; color:#1e90ff; } /* Blau für Akzent */
-header p { font-size:1.2rem; color:#bbb; }
+header h1 { color: #1e90ff; font-size: 3rem; }
+header p { color: #ccc; font-size: 1.2rem; }
 
 /* Portfolio Grid */
-.portfolio { padding: 2rem; }
-.portfolio h2 { text-align:center; font-size:2rem; margin-bottom:2rem; color:#ff7f50; } /* Orange für Highlights */
+.portfolio { padding: 3rem 2rem; }
+.portfolio h2 { text-align:center; color:#ff7f50; margin-bottom:2rem; }
 .grid {
-  display:grid;
+  display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap:2rem;
+  gap: 2rem;
 }
 
-/* Liquid Glass Card */
+/* Card */
 .card {
-  background: rgba(40,40,40,0.5);
-  backdrop-filter: blur(12px);
+  background: rgba(30,30,30,0.7);
+  backdrop-filter: blur(10px);
   border-radius: 20px;
-  overflow:hidden;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-  text-align:center;
-  transition: transform 0.5s ease, box-shadow 0.5s ease;
-  cursor:pointer;
+  overflow: hidden;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-.card p {
-  padding:1rem;
-  font-weight:600;
-  color:#ccc;
-}
+.card img { width:100%; height:200px; object-fit: cover; }
+.card p { padding: 1rem; color: #ccc; }
 
-/* Hover-Effekt */
+/* Hover Effekt */
 .card:hover {
   transform: translateY(-10px) scale(1.05);
-  box-shadow: 0 16px 40px rgba(0,0,0,0.7);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.6);
 }
+
+/* Über mich / Kontakt */
+section.about, section.contact {
+  padding: 3rem 2rem;
+  background-color: #111;
+  border-radius: 15px;
+  margin: 2rem auto;
+  max-width: 1000px;
+  text-align: center;
+}
+section.about h2, section.contact h2 {
+  color: #1e90ff;
+  margin-bottom: 1rem;
+}
+section.about p, section.contact p { color:#ccc; }
 
 /* Lightbox Overlay */
 #lightbox {
   position: fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
+  top:0; left:0; width:100%; height:100%;
   background: rgba(0,0,0,0.9);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+  display: none; justify-content:center; align-items:center;
+  z-index:1000;
 }
 #lightbox img {
-  max-width: 90%;
-  max-height: 90%;
-  border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.7);
+  max-width:90%; max-height:90%; border-radius:20px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.7);
 }
-#lightbox.show { display: flex; }
+#lightbox.show { display:flex; }
