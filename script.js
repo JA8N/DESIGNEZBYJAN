@@ -22,12 +22,31 @@ const lightboxImg = lightbox.querySelector('img');
 const lightboxInfo = lightbox.querySelector('.lightbox-info');
 const lightboxClose = lightbox.querySelector('.lightbox-close');
 
-// Open lightbox when clicking card images
-document.querySelectorAll('.card').forEach(card => {
+// Open lightbox for floating reference cards
+document.querySelectorAll('.float-card').forEach((card, index) => {
   card.addEventListener('click', function() {
     const img = this.querySelector('img');
-    const title = this.querySelector('.card-info h3').textContent;
-    const description = this.querySelector('.card-info p').textContent;
+    const title = `Reference Image ${index + 1}`;
+    const description = "Original inspiration for design";
+    
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt;
+    lightboxInfo.innerHTML = `
+      <h3 style="color: var(--text-primary); font-size: 1.5rem; margin-bottom: 0.5rem;">${title}</h3>
+      <p style="color: var(--text-secondary);">${description}</p>
+    `;
+    
+    lightbox.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  });
+});
+
+// Open lightbox for result cards
+document.querySelectorAll('.result-card').forEach(card => {
+  card.addEventListener('click', function() {
+    const img = this.querySelector('.card-image img');
+    const title = this.querySelector('.card-caption h4').textContent;
+    const description = this.querySelector('.card-caption p').textContent;
     
     lightboxImg.src = img.src;
     lightboxImg.alt = img.alt;
@@ -79,10 +98,13 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, observerOptions);
 
-// Observe cards for staggered animation
-document.querySelectorAll('.card').forEach((card, index) => {
-  card.style.opacity = '0';
-  card.style.animationDelay = `${index * 0.1}s`;
+// Observe glass boxes
+document.querySelectorAll('.glass-box').forEach(box => {
+  observer.observe(box);
+});
+
+// Observe result cards
+document.querySelectorAll('.result-card').forEach(card => {
   observer.observe(card);
 });
 
