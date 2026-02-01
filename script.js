@@ -1,4 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Clipboard Functionality ---
+    window.copyToClipboard = function(text, element) {
+        navigator.clipboard.writeText(text).then(() => {
+            // Visual Feedback
+            element.classList.add('copied');
+            const statusSpan = element.querySelector('.status');
+            const originalText = statusSpan.textContent;
+            statusSpan.textContent = "COPIED!";
+            
+            setTimeout(() => {
+                element.classList.remove('copied');
+                statusSpan.textContent = originalText;
+            }, 2000);
+        }).catch(err => {
+            console.error('Failed to copy: ', err);
+        });
+    }
+
     // --- Navigation Logic ---
     const burger = document.querySelector('.burger');
     const nav = document.querySelector('.nav-links');
