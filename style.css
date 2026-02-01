@@ -638,6 +638,45 @@ body {
     background: rgba(255, 255, 255, 0.08);
 }
 
+.addons {
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem;
+    margin: 1rem 0 0.5rem;
+    flex-wrap: wrap;
+}
+
+.addon-chip {
+    padding: 8px 14px;
+    border-radius: 30px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-weight: 600;
+}
+
+.addon-chip:hover {
+    transform: translateY(-2px);
+    border-color: var(--primary);
+    box-shadow: 0 8px 20px rgba(253, 20, 69, 0.25);
+}
+
+.addon-chip.selected {
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    color: #fff;
+    border-color: transparent;
+}
+
+.price-card .total {
+    margin-top: 0.5rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 1.2rem;
+}
 .popular {
     border: 2px solid var(--primary);
     transform: scale(1.05);
