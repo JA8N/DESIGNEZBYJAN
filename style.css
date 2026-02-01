@@ -554,7 +554,7 @@ body {
     border-radius: 16px;
 }
 
-.label {
+.comparison-container .label {
     position: absolute;
     top: 10px;
     left: 10px;
