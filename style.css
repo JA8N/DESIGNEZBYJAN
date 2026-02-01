@@ -714,6 +714,23 @@ body {
     margin-bottom: 0.5rem;
 }
 
+.addon-card {
+    position: relative;
+}
+
+.addon-card .badge {
+    position: absolute;
+    top: -12px;
+    right: 16px;
+    background: var(--primary);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: #fff;
+    box-shadow: 0 6px 18px rgba(253, 20, 69, 0.35);
+}
+
 .addon-price {
     font-weight: 800;
     margin-bottom: 0.5rem;
