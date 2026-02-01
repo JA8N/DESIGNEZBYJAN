@@ -169,15 +169,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const btn = addon.querySelector('.addon-toggle');
         const price = parseNum(addon.dataset.price);
         btn.setAttribute('aria-pressed', 'false');
+        const setBtnText = (added) => {
+            btn.textContent = added ? `Remove -${price} R$` : `Add +${price} R$`;
+        };
+        setBtnText(false);
         btn.addEventListener('click', () => {
             btn.classList.toggle('active');
             if (btn.classList.contains('active')) {
                 state.addonsTotal += price;
-                btn.textContent = 'Remove';
+                setBtnText(true);
                 btn.setAttribute('aria-pressed', 'true');
             } else {
                 state.addonsTotal -= price;
-                btn.textContent = 'Add';
+                setBtnText(false);
                 btn.setAttribute('aria-pressed', 'false');
             }
             updateAllTotals();
