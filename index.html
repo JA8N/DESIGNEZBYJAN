@@ -106,48 +106,47 @@
 
     <section id="pricing" class="section">
         <h2 class="section-title">Pricing</h2>
-        <div class="pricing-grid">
-            <div class="glass-card price-card">
-                <h3>Shirt or Pants</h3>
-                <div class="price">150 R$</div>
-                <ul>
-                    <li>Classic Shirt or classic Pants</li>
-                    <li>Quality finish and clean shading</li>
-                    <li>1 revision included</li>
-                </ul>
-                <div class="addons">
-                    <button class="addon-chip" data-price="75">Finish Upgrade +75 R$</button>
-                    <button class="addon-chip" data-price="50">Fast Delivery +50 R$</button>
+        <div class="pricing-layout">
+            <div class="pricing-grid">
+                <div class="glass-card price-card" data-base="150">
+                    <h3>Shirt or Pants</h3>
+                    <div class="price">150 R$</div>
+                    <ul>
+                        <li>Classic Shirt or classic Pants</li>
+                        <li>Quality finish and clean shading</li>
+                        <li>1 revision included</li>
+                    </ul>
+                    <div class="total">Total: 150 R$</div>
+                    <a href="#contact" class="cta-button small">Order</a>
                 </div>
-                <div class="total">Total: 150 R$</div>
-                <a href="#contact" class="cta-button small">Order</a>
-            </div>
-            <div class="glass-card price-card popular">
-                <div class="badge">Popular</div>
-                <h3>Set (Shirt + Pants)</h3>
-                <div class="price">300 R$</div>
-                <ul>
-                    <li>Full outfit set</li>
-                    <li>High-detail shading</li>
-                    <li>3 revisions included</li>
-                </ul>
-                <div class="addons">
-                    <button class="addon-chip" data-price="75">Finish Upgrade +75 R$</button>
-                    <button class="addon-chip" data-price="50">Fast Delivery +50 R$</button>
+                <div class="glass-card price-card popular" data-base="300">
+                    <div class="badge">Popular</div>
+                    <h3>Set (Shirt + Pants)</h3>
+                    <div class="price">300 R$</div>
+                    <ul>
+                        <li>Full outfit set</li>
+                        <li>High-detail shading</li>
+                        <li>3 revisions included</li>
+                    </ul>
+                    <div class="total">Total: 300 R$</div>
+                    <a href="#contact" class="cta-button small">Order</a>
                 </div>
-                <div class="total">Total: 300 R$</div>
-                <a href="#contact" class="cta-button small">Order</a>
             </div>
-            <div class="glass-card price-card">
-                <h3>Upgrades & Add-ons</h3>
-                <div class="price">+50 R$ / +75 R$</div>
-                <ul>
-                    <li>Upgrade Finish +75 R$: extra time for micro details</li>
-                    <li>Fast Delivery +50 R$: accelerated turnaround</li>
-                    <li>Applies to any package above</li>
-                </ul>
-                <a href="#contact" class="cta-button small">Add to Order</a>
-            </div>
+            <aside class="addons-sidebar">
+                <div class="glass-card addon-card" data-price="75" id="addon-finish">
+                    <h3>Advanced Finish</h3>
+                    <div class="addon-price">+75 R$</div>
+                    <p>Meticulous techniques and extended time for premium polish. Beyond micro adjustments — refined details, consistency, and professional final pass.</p>
+                    <button class="addon-toggle">Add</button>
+                </div>
+                <div class="glass-card addon-card" data-price="50" id="addon-fast">
+                    <h3>Fast Delivery</h3>
+                    <div class="addon-price">+50 R$</div>
+                    <p>Accelerated turnaround without quality loss. Prioritized workflow to deliver sooner.</p>
+                    <button class="addon-toggle">Add</button>
+                </div>
+                <p class="addons-note">Add-ons apply to any package. Totals update live.</p>
+            </aside>
         </div>
     </section>
 
