@@ -152,4 +152,30 @@ document.addEventListener('DOMContentLoaded', () => {
             blobTicking = true;
         }
     });
+
+    const priceCards = document.querySelectorAll('.price-card');
+    priceCards.forEach(card => {
+        const priceEl = card.querySelector('.price');
+        const totalEl = card.querySelector('.total');
+        const chips = card.querySelectorAll('.addon-chip');
+        if (!priceEl || !totalEl || chips.length === 0) return;
+        const base = parseInt(priceEl.textContent.replace(/\D/g, ''), 10) || 0;
+        let addons = 0;
+        const updateTotal = () => {
+            totalEl.textContent = `Total: ${base + addons} R$`;
+        };
+        updateTotal();
+        chips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                chip.classList.toggle('selected');
+                const p = parseInt(chip.dataset.price || '0', 10);
+                if (chip.classList.contains('selected')) {
+                    addons += p;
+                } else {
+                    addons -= p;
+                }
+                updateTotal();
+            });
+        });
+    });
 });
