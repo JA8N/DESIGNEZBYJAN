@@ -169,19 +169,21 @@ document.addEventListener('DOMContentLoaded', () => {
         const btn = addon.querySelector('.addon-toggle');
         const price = parseNum(addon.dataset.price);
         btn.setAttribute('aria-pressed', 'false');
-        const setBtnText = (added) => {
-            btn.textContent = added ? `Remove -${price} R$` : `Add +${price} R$`;
+        const setBtn = (added) => {
+            btn.innerHTML = added
+                ? `<i class="fa-solid fa-minus"></i><span>Remove -${price} R$</span>`
+                : `<i class="fa-solid fa-plus"></i><span>Add +${price} R$</span>`;
         };
-        setBtnText(false);
+        setBtn(false);
         btn.addEventListener('click', () => {
             btn.classList.toggle('active');
             if (btn.classList.contains('active')) {
                 state.addonsTotal += price;
-                setBtnText(true);
+                setBtn(true);
                 btn.setAttribute('aria-pressed', 'true');
             } else {
                 state.addonsTotal -= price;
-                setBtnText(false);
+                setBtn(false);
                 btn.setAttribute('aria-pressed', 'false');
             }
             updateAllTotals();
@@ -195,17 +197,21 @@ document.addEventListener('DOMContentLoaded', () => {
         const savedVol = parseInt(localStorage.getItem('audio_volume') || '75', 10);
         vol.value = String(savedVol);
         audio.volume = Math.min(Math.max(savedVol, 0), 100) / 100;
-        let playing = false;
+        let playing = true;
         const setIcon = () => {
             toggle.innerHTML = playing ? '<i class="fa-solid fa-pause"></i>' : '<i class="fa-solid fa-play"></i>';
         };
+        setIcon();
+        toggle.setAttribute('aria-pressed', playing ? 'true' : 'false');
         const tryPlay = () => {
             audio.play().then(() => {
                 playing = true;
                 setIcon();
+                toggle.setAttribute('aria-pressed', 'true');
             }).catch(() => {
                 playing = false;
                 setIcon();
+                toggle.setAttribute('aria-pressed', 'false');
             });
         };
         tryPlay();
@@ -214,6 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 audio.pause();
                 playing = false;
                 setIcon();
+                toggle.setAttribute('aria-pressed', 'false');
             } else {
                 tryPlay();
             }
