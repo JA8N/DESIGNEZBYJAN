@@ -187,4 +187,47 @@ document.addEventListener('DOMContentLoaded', () => {
             updateAllTotals();
         });
     });
+    
+    const audio = document.getElementById('bg-audio');
+    const vol = document.getElementById('audio-volume');
+    const toggle = document.getElementById('audio-toggle');
+    if (audio && vol && toggle) {
+        const savedVol = parseInt(localStorage.getItem('audio_volume') || '30', 10);
+        vol.value = String(savedVol);
+        audio.volume = Math.min(Math.max(savedVol, 0), 100) / 100;
+        let playing = false;
+        const setIcon = () => {
+            toggle.innerHTML = playing ? '<i class="fa-solid fa-pause"></i>' : '<i class="fa-solid fa-play"></i>';
+        };
+        const tryPlay = () => {
+            audio.play().then(() => {
+                playing = true;
+                setIcon();
+            }).catch(() => {
+                playing = false;
+                setIcon();
+            });
+        };
+        tryPlay();
+        toggle.addEventListener('click', () => {
+            if (playing) {
+                audio.pause();
+                playing = false;
+                setIcon();
+            } else {
+                tryPlay();
+            }
+        });
+        vol.addEventListener('input', () => {
+            const v = Math.min(Math.max(parseInt(vol.value, 10), 0), 100) / 100;
+            audio.volume = v;
+            localStorage.setItem('audio_volume', String(parseInt(vol.value, 10)));
+            if (!playing) {
+                tryPlay();
+            }
+        });
+        document.addEventListener('click', () => {
+            if (!playing) tryPlay();
+        }, { once: true });
+    }
 });
