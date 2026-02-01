@@ -6,7 +6,8 @@
     --glass-bg: rgba(255, 255, 255, 0.05);
     --glass-border: rgba(255, 255, 255, 0.1);
     --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-main: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-heading: "Sora", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 * {
@@ -274,6 +275,7 @@ body {
     font-size: 0.9rem;
     color: #aaa;
     margin-bottom: 0.2rem;
+    font-family: var(--font-heading);
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -336,6 +338,8 @@ body {
 .item-info h3 {
     font-size: 1.4rem;
     margin-bottom: 0.5rem;
+    font-family: var(--font-heading);
+    font-weight: 700;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -389,6 +393,7 @@ body {
 .logo {
     font-size: 1.5rem;
     font-weight: 700;
+    font-family: var(--font-heading);
     background: linear-gradient(90deg, var(--primary), var(--secondary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -465,6 +470,8 @@ body {
 .hero h1 {
     font-size: 3.5rem;
     margin-bottom: 1rem;
+    font-family: var(--font-heading);
+    font-weight: 800;
     background: linear-gradient(to right, #fff, #ccc);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -507,6 +514,7 @@ body {
     font-size: 2.5rem;
     margin-bottom: 4rem;
     position: relative;
+    font-family: var(--font-heading);
     display: inline-block;
     left: 50%;
     transform: translateX(-50%);
@@ -712,6 +720,8 @@ body {
 
 .addon-card h3 {
     margin-bottom: 0.5rem;
+    font-family: var(--font-heading);
+    font-weight: 700;
 }
 
 .addon-card {
@@ -764,6 +774,8 @@ body {
 .price-card h3 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
+    font-family: var(--font-heading);
+    font-weight: 700;
 }
 
 .price {
