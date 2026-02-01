@@ -157,19 +157,19 @@ body {
     letter-spacing: 1px;
 }
 
-/* Portfolio Grid Rectangular - The "Vom Stuhl fallen" Look */
+/* Portfolio Grid - Landscape Stacked (Querformat untereinander) */
 .showcase-3 {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 3rem;
+    grid-template-columns: 1fr; /* Single column */
+    gap: 4rem; /* More space between stacked items */
     perspective: 1000px;
-    max-width: 1100px;
+    max-width: 900px; /* Control width for landscape look */
     margin: 0 auto;
 }
 
 .gallery-item.rectangular {
     height: auto;
-    min-height: 550px; /* Taller for portrait look */
+    min-height: auto;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -177,12 +177,93 @@ body {
     border: 1px solid rgba(255,255,255,0.05);
 }
 
+/* Make images landscape/wide */
 .img-container {
     width: 100%;
-    height: 450px; /* Significantly taller for clothing sets */
+    height: 400px; /* Fixed height for landscape strip */
     overflow: hidden;
     position: relative;
 }
+
+.img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center; /* Focus on center of design */
+    transition: transform 0.8s ease;
+}
+
+/* Contact Section Redesign */
+.contact-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contact-card {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-card:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--primary);
+}
+
+.icon-box {
+    font-size: 2.5rem;
+    margin-right: 1.5rem;
+    color: var(--primary);
+    width: 60px;
+    text-align: center;
+}
+
+.info-box h3 {
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-bottom: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.copy-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    font-family: monospace; /* Code look for copyable text */
+}
+
+.status {
+    font-size: 0.8rem;
+    color: var(--secondary);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.contact-card:hover .status {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Copied State */
+.contact-card.copied {
+    border-color: #00ff88;
+    background: rgba(0, 255, 136, 0.1);
+}
+
+.contact-card.copied .status {
+    color: #00ff88;
+    content: "Copied!";
+}
+
 
 .img-container img {
     width: 100%;
