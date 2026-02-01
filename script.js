@@ -168,12 +168,17 @@ document.addEventListener('DOMContentLoaded', () => {
     addonCards.forEach(addon => {
         const btn = addon.querySelector('.addon-toggle');
         const price = parseNum(addon.dataset.price);
+        btn.setAttribute('aria-pressed', 'false');
         btn.addEventListener('click', () => {
             btn.classList.toggle('active');
             if (btn.classList.contains('active')) {
                 state.addonsTotal += price;
+                btn.textContent = 'Remove';
+                btn.setAttribute('aria-pressed', 'true');
             } else {
                 state.addonsTotal -= price;
+                btn.textContent = 'Add';
+                btn.setAttribute('aria-pressed', 'false');
             }
             updateAllTotals();
         });
