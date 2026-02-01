@@ -15,13 +15,15 @@
     </div>
 
     <nav class="glass-nav">
-        <div class="logo">DESIGNEZBYJAN</div>
+        <div class="logo">
+            <i class="fa-solid fa-layer-group"></i> DESIGNEZBYJAN
+        </div>
         <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#comparison">Vergleich</a></li>
-            <li><a href="#pricing">Preise</a></li>
-            <li><a href="#contact">Kontakt</a></li>
+            <li><a href="#home"><i class="fa-solid fa-house"></i> Home</a></li>
+            <li><a href="#portfolio"><i class="fa-solid fa-image"></i> Portfolio</a></li>
+            <li><a href="#comparison"><i class="fa-solid fa-code-compare"></i> Vergleich</a></li>
+            <li><a href="#pricing"><i class="fa-solid fa-tags"></i> Preise</a></li>
+            <li><a href="#contact"><i class="fa-solid fa-envelope"></i> Kontakt</a></li>
         </ul>
         <div class="burger">
             <div class="line1"></div>
@@ -32,38 +34,54 @@
 
     <section id="home" class="hero">
         <div class="glass-card hero-content">
+            <div class="hero-icon">
+                <i class="fa-brands fa-roblox"></i>
+            </div>
             <h1>Professional Roblox Design</h1>
             <p>High Quality Classic Shirts & Pants</p>
-            <a href="#portfolio" class="cta-button">Meine Arbeit ansehen</a>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="count">100+</span>
+                    <span class="label">Designs</span>
+                </div>
+                <div class="stat">
+                    <span class="count">5★</span>
+                    <span class="label">Rating</span>
+                </div>
+            </div>
+            <a href="#portfolio" class="cta-button">Meine Arbeit ansehen <i class="fa-solid fa-arrow-right"></i></a>
         </div>
     </section>
 
     <section id="portfolio" class="section">
-        <h2 class="section-title">Portfolio</h2>
-        <div class="gallery-grid">
-            <!-- Example items based on user description -->
-            <div class="glass-card gallery-item">
-                <img src="images/JA8N/roblox1.jpg" alt="Roblox Design 1" onerror="this.src='https://placehold.co/400x400/FD1445/white?text=Design+1'">
-                <div class="overlay">
-                    <h3>Classic Shirt</h3>
+        <h2 class="section-title"><i class="fa-solid fa-palette"></i> Portfolio Highlights</h2>
+        <div class="gallery-grid showcase-3">
+            <!-- 3 Rectangular Showcase Items -->
+            <div class="glass-card gallery-item rectangular">
+                <div class="img-container">
+                    <img src="images/JA8N/roblox1.jpg" alt="Roblox Design 1" onerror="this.src='https://placehold.co/600x400/FD1445/white?text=Design+1'">
+                </div>
+                <div class="item-info">
+                    <h3><i class="fa-solid fa-shirt"></i> Cyberpunk Aesthetic</h3>
+                    <p>Classic Shirt Design</p>
                 </div>
             </div>
-            <div class="glass-card gallery-item">
-                <img src="images/JA8N/roblox2.jpg" alt="Roblox Design 2" onerror="this.src='https://placehold.co/400x400/FD723A/white?text=Design+2'">
-                <div class="overlay">
-                    <h3>Classic Pants</h3>
+            <div class="glass-card gallery-item rectangular">
+                <div class="img-container">
+                    <img src="images/JA8N/roblox2.jpg" alt="Roblox Design 2" onerror="this.src='https://placehold.co/600x400/FD723A/white?text=Design+2'">
+                </div>
+                <div class="item-info">
+                    <h3><i class="fa-solid fa-user-astronaut"></i> Future Tech</h3>
+                    <p>Full Outfit Set</p>
                 </div>
             </div>
-            <div class="glass-card gallery-item">
-                <img src="images/JA8N/reference1.jpg" alt="Reference 1" onerror="this.src='https://placehold.co/400x400/1a1a1a/white?text=Ref+1'">
-                <div class="overlay">
-                    <h3>Concept Art</h3>
+            <div class="glass-card gallery-item rectangular">
+                <div class="img-container">
+                    <img src="images/JA8N/reference1.jpg" alt="Reference 1" onerror="this.src='https://placehold.co/600x400/1a1a1a/white?text=Concept+Art'">
                 </div>
-            </div>
-             <div class="glass-card gallery-item">
-                <img src="images/JA8N/reference2.jpg" alt="Reference 2" onerror="this.src='https://placehold.co/400x400/1a1a1a/white?text=Ref+2'">
-                <div class="overlay">
-                    <h3>Concept Art</h3>
+                <div class="item-info">
+                    <h3><i class="fa-solid fa-gem"></i> Luxury Style</h3>
+                    <p>Exclusive Edition</p>
                 </div>
             </div>
         </div>
