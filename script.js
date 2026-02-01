@@ -261,8 +261,35 @@ window.addEventListener('DOMContentLoaded', () => {
   }, 100);
 });
 
+// ========================================// SCROLL EFFECTS & PARALLAX
 // ========================================
-// EASTER EGG: KONAMI CODE
+let scrollY = 0;
+
+function updateScrollEffects() {
+  scrollY = window.scrollY;
+  
+  // Update parallax elements
+  const parallaxElements = document.querySelectorAll('.parallax-bg, .parallax-slow, .parallax-fast');
+  parallaxElements.forEach(el => {
+    const speed = el.classList.contains('parallax-fast') ? -0.3 : 
+                  el.classList.contains('parallax-slow') ? 0.5 : 1;
+    el.style.transform = `translateY(${scrollY * speed}px)`;
+  });
+  
+  // Fade on scroll for hero
+  const hero = document.querySelector('.hero');
+  if (hero) {
+    const opacity = Math.max(0, 1 - scrollY / 500);
+    const translate = scrollY * 0.2;
+    hero.style.opacity = opacity;
+    hero.style.transform = `translateY(${translate}px)`;
+  }
+}
+
+window.addEventListener('scroll', updateScrollEffects);
+updateScrollEffects(); // Initial call
+
+// ========================================// EASTER EGG: KONAMI CODE
 // ========================================
 let konamiCode = [];
 const konamiPattern = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];

@@ -8,27 +8,27 @@
 }
 
 :root {
-  /* Color System */
-  --bg-primary: #0a0a0a;
+  /* Color System - Custom Shoe Colors */
+  --bg-primary: #000000;
   --bg-secondary: #111111;
-  --bg-card: #171717;
-  --text-primary: #e8e8e8;
-  --text-secondary: #a0a0a0;
-  --text-muted: #666666;
+  --bg-card: #1a1a1a;
+  --text-primary: #ffffff;
+  --text-secondary: #cccccc;
+  --text-muted: #888888;
   
-  /* Accent Colors */
-  --accent-primary: #00ff88;
-  --accent-secondary: #00ccff;
-  --accent-gradient: linear-gradient(135deg, #00ff88 0%, #00ccff 100%);
+  /* Accent Colors - User Specified */
+  --accent-primary: #FD1445;
+  --accent-secondary: #FD723A;
+  --accent-gradient: linear-gradient(135deg, #FD1445 0%, #FD723A 100%);
   
   /* Shadows & Effects */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
-  --shadow-accent: 0 0 24px rgba(0, 255, 136, 0.2);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.7);
+  --shadow-accent: 0 0 24px rgba(253, 20, 69, 0.3);
   
   /* Borders */
-  --border-subtle: 1px solid rgba(255, 255, 255, 0.08);
+  --border-subtle: 1px solid rgba(255, 255, 255, 0.1);
   --border-accent: 1px solid var(--accent-primary);
   
   /* Spacing */
@@ -203,19 +203,30 @@ body::before {
 }
 
 /* ========================================
-   GLASSMORPHISM BOXES
+   GLASSMORPHISM BOXES - Liquid Glass
    ======================================== */
 .glass-box {
-  background: rgba(23, 23, 23, 0.6);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
+  background: rgba(26, 26, 26, 0.4);
+  backdrop-filter: blur(20px) saturate(200%);
+  -webkit-backdrop-filter: blur(20px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
   padding: var(--spacing-md);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   position: relative;
-  animation: glassSlideIn 1s ease-out;
+  animation: liquidMorph 1s ease-out;
   overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.glass-box:hover {
+  background: rgba(26, 26, 26, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
 .glass-box::before {
@@ -227,10 +238,11 @@ body::before {
   height: 200%;
   background: radial-gradient(
     circle,
-    rgba(0, 255, 136, 0.08) 0%,
+    rgba(253, 20, 69, 0.1) 0%,
     transparent 70%
   );
-  animation: glassRotate 10s linear infinite;
+  animation: liquidFlow 8s linear infinite;
+  pointer-events: none;
 }
 
 .glass-box::after {
@@ -243,29 +255,36 @@ body::before {
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(0, 255, 136, 0.1) 50%,
+    rgba(255, 255, 255, 0.1) 50%,
     transparent 100%
   );
-  animation: glassShimmer 3s ease-in-out infinite;
+  animation: shimmer 4s ease-in-out infinite;
+  pointer-events: none;
 }
 
-@keyframes glassSlideIn {
-  from {
+@keyframes liquidMorph {
+  0% {
     opacity: 0;
     transform: translateY(30px) scale(0.95);
+    border-radius: 0px;
   }
-  to {
+  50% {
+    border-radius: 12px;
+  }
+  100% {
     opacity: 1;
     transform: translateY(0) scale(1);
+    border-radius: 24px;
   }
 }
 
-@keyframes glassRotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+@keyframes liquidFlow {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.1); }
+  100% { transform: rotate(360deg) scale(1); }
 }
 
-@keyframes glassShimmer {
+@keyframes shimmer {
   0% { left: -100%; }
   50%, 100% { left: 100%; }
 }
@@ -291,10 +310,10 @@ body::before {
 
 @keyframes headerGlow {
   0%, 100% {
-    text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+    text-shadow: 0 0 10px rgba(253, 20, 69, 0.3);
   }
   50% {
-    text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+    text-shadow: 0 0 20px rgba(253, 114, 58, 0.5);
   }
 }
 
@@ -312,10 +331,10 @@ body::before {
 }
 
 .badge-small.accent {
-  background: rgba(0, 255, 136, 0.15);
+  background: rgba(253, 20, 69, 0.15);
   border-color: var(--accent-primary);
   color: var(--accent-primary);
-  box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+  box-shadow: 0 0 15px rgba(253, 20, 69, 0.3);
 }
 
 @keyframes badgePulse {
@@ -349,11 +368,11 @@ body::before {
   overflow: hidden;
   box-shadow: 
     0 10px 30px rgba(0, 0, 0, 0.4),
-    0 0 20px rgba(0, 255, 136, 0.15);
+    0 0 20px rgba(253, 20, 69, 0.15);
   cursor: pointer;
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   background: var(--bg-card);
-  border: 2px solid rgba(0, 255, 136, 0.25);
+  border: 2px solid rgba(253, 20, 69, 0.25);
   position: relative;
   animation: cardSlideIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
 }
@@ -368,7 +387,7 @@ body::before {
   background: linear-gradient(
     45deg,
     transparent 30%,
-    rgba(0, 255, 136, 0.1) 50%,
+    rgba(253, 20, 69, 0.1) 50%,
     transparent 70%
   );
   transform: rotate(45deg);
@@ -397,8 +416,8 @@ body::before {
   transform: translateY(-12px) scale(1.05) rotate(2deg);
   box-shadow: 
     0 20px 50px rgba(0, 0, 0, 0.6),
-    0 0 50px rgba(0, 255, 136, 0.4),
-    inset 0 0 30px rgba(0, 255, 136, 0.1);
+    0 0 50px rgba(253, 20, 69, 0.4),
+    inset 0 0 30px rgba(253, 20, 69, 0.1);
   border-color: var(--accent-primary);
   animation: glitch 0.3s infinite;
 }
@@ -1180,6 +1199,92 @@ footer p {
   
   .float-card {
     max-width: 280px;
+  }
+}
+
+/* ========================================
+   SCROLL EFFECTS & PARALLAX
+   ======================================== */
+.parallax-bg {
+  will-change: transform;
+}
+
+.parallax-slow {
+  will-change: transform;
+}
+
+.parallax-fast {
+  will-change: transform;
+}
+
+.sticky-section {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* ========================================
+   ADDITIONAL ANIMATIONS
+   ======================================== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
