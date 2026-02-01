@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const vol = document.getElementById('audio-volume');
     const toggle = document.getElementById('audio-toggle');
     if (audio && vol && toggle) {
-        const savedVol = parseInt(localStorage.getItem('audio_volume') || '30', 10);
+        const savedVol = parseInt(localStorage.getItem('audio_volume') || '75', 10);
         vol.value = String(savedVol);
         audio.volume = Math.min(Math.max(savedVol, 0), 100) / 100;
         let playing = false;
