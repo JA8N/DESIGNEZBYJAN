@@ -145,26 +145,28 @@
 
     <section id="contact" class="section">
         <h2 class="section-title">Kontakt</h2>
-        <div class="glass-card contact-form-container">
-            <div class="contact-info" style="text-align: center; margin-bottom: 2rem;">
-                <p><i class="fab fa-discord"></i> Discord: <strong>designez</strong></p>
-                <p><i class="fas fa-envelope"></i> Email: <strong>designez.jan@proton.me</strong></p>
+        <div class="contact-container">
+            <div class="glass-card contact-card" onclick="copyToClipboard('designez', this)">
+                <div class="icon-box">
+                    <i class="fab fa-discord"></i>
+                </div>
+                <div class="info-box">
+                    <h3>Discord</h3>
+                    <p class="copy-text">designez</p>
+                    <span class="status">Click to Copy</span>
+                </div>
             </div>
-            <form id="contactForm">
-                <div class="input-group">
-                    <input type="text" id="name" required>
-                    <label for="name">Dein Name / Roblox User</label>
+
+            <div class="glass-card contact-card" onclick="copyToClipboard('designez.jan@proton.me', this)">
+                <div class="icon-box">
+                    <i class="fas fa-envelope"></i>
                 </div>
-                <div class="input-group">
-                    <input type="email" id="email" required>
-                    <label for="email">Email / Discord</label>
+                <div class="info-box">
+                    <h3>Email</h3>
+                    <p class="copy-text">designez.jan@proton.me</p>
+                    <span class="status">Click to Copy</span>
                 </div>
-                <div class="input-group">
-                    <textarea id="message" required></textarea>
-                    <label for="message">Deine Nachricht</label>
-                </div>
-                <button type="submit" class="cta-button">Senden</button>
-            </form>
+            </div>
         </div>
     </section>
 
