@@ -704,8 +704,11 @@ body {
 .addons-sidebar {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 2rem;
 }
+
+.addons-sidebar #addon-fast { order: 1; }
+.addons-sidebar #addon-finish { order: 2; }
 
 .addon-card h3 {
     margin-bottom: 0.5rem;
