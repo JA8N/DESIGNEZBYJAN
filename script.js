@@ -154,28 +154,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const priceCards = document.querySelectorAll('.price-card');
-    priceCards.forEach(card => {
-        const priceEl = card.querySelector('.price');
-        const totalEl = card.querySelector('.total');
-        const chips = card.querySelectorAll('.addon-chip');
-        if (!priceEl || !totalEl || chips.length === 0) return;
-        const base = parseInt(priceEl.textContent.replace(/\D/g, ''), 10) || 0;
-        let addons = 0;
-        const updateTotal = () => {
-            totalEl.textContent = `Total: ${base + addons} R$`;
-        };
-        updateTotal();
-        chips.forEach(chip => {
-            chip.addEventListener('click', () => {
-                chip.classList.toggle('selected');
-                const p = parseInt(chip.dataset.price || '0', 10);
-                if (chip.classList.contains('selected')) {
-                    addons += p;
-                } else {
-                    addons -= p;
-                }
-                updateTotal();
-            });
+    const addonCards = document.querySelectorAll('.addon-card');
+    const state = { addonsTotal: 0 };
+    const parseNum = (txt) => parseInt(String(txt).replace(/\D/g, ''), 10) || 0;
+    const updateAllTotals = () => {
+        priceCards.forEach(card => {
+            const base = parseNum(card.dataset.base || card.querySelector('.price')?.textContent);
+            const totalEl = card.querySelector('.total');
+            if (totalEl) totalEl.textContent = `Total: ${base + state.addonsTotal} R$`;
+        });
+    };
+    updateAllTotals();
+    addonCards.forEach(addon => {
+        const btn = addon.querySelector('.addon-toggle');
+        const price = parseNum(addon.dataset.price);
+        btn.addEventListener('click', () => {
+            btn.classList.toggle('active');
+            if (btn.classList.contains('active')) {
+                state.addonsTotal += price;
+            } else {
+                state.addonsTotal -= price;
+            }
+            updateAllTotals();
         });
     });
 });
