@@ -227,6 +227,8 @@ body {
     height: 450px; /* Fixed height for landscape strip */
     overflow: hidden;
     position: relative;
+    aspect-ratio: 16 / 9;
+    background: linear-gradient(180deg, #0a0a0a, #151515);
 }
 
 .img-container img {
@@ -843,5 +845,27 @@ footer {
     
     .arrow {
         transform: rotate(90deg);
+    }
+    
+    .gallery-grid.showcase-3 {
+        gap: 2rem;
+        padding: 0 0.5rem;
+    }
+
+    .img-container {
+        height: 360px;
+    }
+
+    .item-info {
+        padding: 1rem;
+    }
+}
+
+@media (pointer: coarse) {
+    .gallery-item.rectangular:hover .img-container img {
+        transform: none;
+    }
+    .gallery-item.rectangular {
+        transition: none;
     }
 }
